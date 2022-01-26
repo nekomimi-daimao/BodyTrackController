@@ -39,6 +39,7 @@ namespace BodyTrackController.Scripts.MessagePack
         private const float ToShort = Ratio;
         private const float ToFloat = 1f / Ratio;
 
+        [IgnoreMember]
         public HumanPose HumanPose
         {
             get

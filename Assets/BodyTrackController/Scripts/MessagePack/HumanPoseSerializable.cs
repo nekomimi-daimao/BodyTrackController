@@ -35,6 +35,7 @@ namespace BodyTrackController.Scripts.MessagePack
             return MessagePackSerializer.Deserialize<HumanPoseSerializable>(buffer);
         }
 
+        [IgnoreMember]
         public HumanPose HumanPose => new HumanPose
         {
             bodyPosition = BodyPosition,
