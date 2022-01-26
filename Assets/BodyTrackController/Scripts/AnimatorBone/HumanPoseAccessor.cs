@@ -1,43 +1,40 @@
 using UnityEngine;
 
+// ReSharper disable MemberCanBePrivate.Global
+
 namespace BodyTrackController.Scripts.AnimatorBone
 {
-    [RequireComponent(typeof(Animator))]
     public sealed class HumanPoseAccessor : MonoBehaviour
     {
-        private Animator _animator;
+        [SerializeField]
+        private Animator animator;
+
         private HumanPoseHandler _humanPoseHandler;
         private HumanPose _humanPose;
 
         public HumanPose HumanPose => _humanPose;
-        public Transform ParentTs { get; private set; }
-
-        private const string ParentObjectName = nameof(HumanPoseAccessor) + "Parent";
+        public Transform Ts { get; private set; }
 
         private void OnEnable()
         {
-            if (_animator == null)
-            {
-                _animator = GetComponent<Animator>();
-            }
-            if (!_animator.isHuman)
+            if (animator == null || !animator.isHuman)
             {
                 enabled = false;
                 return;
             }
 
-            var ts = transform;
-            if (ts.parent == null)
+            Ts = transform;
+            var animTs = animator.transform;
+            if (animTs.parent != Ts)
             {
-                ts.parent = new GameObject(ParentObjectName).transform;
+                animTs.parent = Ts;
             }
-            ParentTs = ts.parent;
-            ts.localPosition = Vector3.zero;
-            ts.localRotation = Quaternion.identity;
-            ts.localScale = Vector3.one;
+            animTs.localPosition = Vector3.zero;
+            animTs.localRotation = Quaternion.identity;
+            animTs.localScale = Vector3.one;
 
             _humanPose = new HumanPose();
-            _humanPoseHandler = new HumanPoseHandler(_animator.avatar, _animator.transform);
+            _humanPoseHandler = new HumanPoseHandler(animator.avatar, animTs);
         }
 
         private void OnDisable()
@@ -47,12 +44,13 @@ namespace BodyTrackController.Scripts.AnimatorBone
             _humanPose = new HumanPose();
         }
 
-        private void Update()
+        public HumanPose GetCurrentPose()
         {
             _humanPoseHandler.GetHumanPose(ref _humanPose);
+            return HumanPose;
         }
 
-        public void SetHumanPose(ref HumanPose humanPose)
+        public void SetPose(ref HumanPose humanPose)
         {
             _humanPoseHandler.SetHumanPose(ref humanPose);
         }
