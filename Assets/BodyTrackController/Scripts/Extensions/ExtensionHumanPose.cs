@@ -9,5 +9,10 @@ namespace BodyTrackController.Scripts.Extensions
         {
             return new HumanPoseSerializable(humanPose.bodyPosition, humanPose.bodyRotation, humanPose.muscles);
         }
+
+        public static HumanPoseCompress ToCompress(this HumanPose humanPose)
+        {
+            return HumanPoseCompress.Parse(ref humanPose);
+        }
     }
 }

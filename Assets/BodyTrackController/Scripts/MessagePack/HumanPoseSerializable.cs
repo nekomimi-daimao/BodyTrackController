@@ -25,13 +25,6 @@ namespace BodyTrackController.Scripts.MessagePack
             Muscles = muscles;
         }
 
-        public HumanPose HumanPose => new HumanPose
-        {
-            bodyPosition = BodyPosition,
-            bodyRotation = BodyRotation,
-            muscles = Muscles,
-        };
-
         public byte[] Serialize()
         {
             return MessagePackSerializer.Serialize(this);
@@ -41,5 +34,12 @@ namespace BodyTrackController.Scripts.MessagePack
         {
             return MessagePackSerializer.Deserialize<HumanPoseSerializable>(buffer);
         }
+
+        public HumanPose HumanPose => new HumanPose
+        {
+            bodyPosition = BodyPosition,
+            bodyRotation = BodyRotation,
+            muscles = Muscles,
+        };
     }
 }
