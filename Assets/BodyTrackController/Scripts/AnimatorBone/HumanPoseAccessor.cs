@@ -12,14 +12,32 @@ namespace BodyTrackController.Scripts.AnimatorBone
         private HumanPoseHandler _humanPoseHandler;
         private HumanPose _humanPose;
 
+        public bool Initialized => _humanPoseHandler != null && animator != null && animator.isHuman;
         public HumanPose HumanPose => _humanPose;
         public Transform Ts { get; private set; }
+        public Animator Animator => animator;
 
         private void OnEnable()
         {
+            if (animator == null)
+            {
+                return;
+            }
+            Init(animator);
+        }
+
+        private void OnDisable()
+        {
+            _humanPoseHandler?.Dispose();
+            _humanPoseHandler = null;
+            _humanPose = new HumanPose();
+        }
+
+        public void Init(Animator humanAnimator)
+        {
+            animator = humanAnimator;
             if (animator == null || !animator.isHuman)
             {
-                enabled = false;
                 return;
             }
 
@@ -35,13 +53,6 @@ namespace BodyTrackController.Scripts.AnimatorBone
 
             _humanPose = new HumanPose();
             _humanPoseHandler = new HumanPoseHandler(animator.avatar, animTs);
-        }
-
-        private void OnDisable()
-        {
-            _humanPoseHandler?.Dispose();
-            _humanPoseHandler = null;
-            _humanPose = new HumanPose();
         }
 
         public HumanPose GetCurrentPose()
