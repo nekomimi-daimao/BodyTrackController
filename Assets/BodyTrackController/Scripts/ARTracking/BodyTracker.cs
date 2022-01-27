@@ -1,6 +1,9 @@
+using System.Linq;
+using BodyTrackController.Scripts.AnimatorBone;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARFoundation.Samples;
+using UnityEngine.XR.ARSubsystems;
 
 namespace BodyTrackController.Scripts.ARTracking
 {
@@ -8,17 +11,16 @@ namespace BodyTrackController.Scripts.ARTracking
     {
         private ARHumanBodyManager _humanBodyManager;
 
+        private BoneController _boneController;
+        private TrackableId _trackableId = TrackableId.invalidId;
+
         [SerializeField]
-        private BoneController boneController;
+        private HumanPoseAccessor humanPoseAccessorPrefab;
+
+        public HumanPoseAccessor HumanPoseAccessor { get; private set; }
 
         private void OnEnable()
         {
-            if (boneController == null)
-            {
-                this.enabled = false;
-                return;
-            }
-
             if (_humanBodyManager == null)
             {
                 _humanBodyManager = FindObjectOfType<ARHumanBodyManager>();
@@ -36,8 +38,6 @@ namespace BodyTrackController.Scripts.ARTracking
 
             _humanBodyManager.pose2DRequested = false;
             _humanBodyManager.pose3DRequested = true;
-
-            boneController.InitializeSkeletonJoints();
             _humanBodyManager.humanBodiesChanged += OnHumanBodiesChanged;
         }
 
@@ -47,15 +47,42 @@ namespace BodyTrackController.Scripts.ARTracking
             {
                 _humanBodyManager.humanBodiesChanged -= OnHumanBodiesChanged;
             }
+            Clear();
+        }
+
+        private void Clear()
+        {
+            if (HumanPoseAccessor != null)
+            {
+                Destroy(HumanPoseAccessor);
+            }
+            HumanPoseAccessor = null;
+            _boneController = null;
+            _trackableId = TrackableId.invalidId;
         }
 
         private void OnHumanBodiesChanged(ARHumanBodiesChangedEventArgs arg)
         {
-            if (arg.updated.Count == 0)
+            if (arg.added.Count > 0)
+            {
+                var arHumanBodyAdd = arg.added[0];
+                _trackableId = arHumanBodyAdd.trackableId;
+                HumanPoseAccessor = Instantiate(humanPoseAccessorPrefab, arHumanBodyAdd.transform);
+                _boneController = HumanPoseAccessor.gameObject.GetComponentInChildren<BoneController>();
+                _boneController.InitializeSkeletonJoints();
+                _boneController.ApplyBodyPose(arHumanBodyAdd);
+            }
+
+            if (arg.removed.Count > 0 && arg.removed.Any(body => body.trackableId == _trackableId))
+            {
+                Clear();
+            }
+
+            if (arg.updated.Count == 0 || _boneController == null)
             {
                 return;
             }
-            boneController.ApplyBodyPose(arg.updated[0]);
+            _boneController.ApplyBodyPose(arg.updated[0]);
         }
     }
 }

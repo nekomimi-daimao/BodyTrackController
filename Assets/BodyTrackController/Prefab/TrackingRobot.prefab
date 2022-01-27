@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4496520407516728372
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5864568591256920230}
+  - component: {fileID: 5939596700717247535}
+  m_Layer: 0
+  m_Name: TrackingRobot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5864568591256920230
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4496520407516728372}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 812907638309560165}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5939596700717247535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4496520407516728372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71edd56be5e46f692e1af30dbaf3dee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 6748692300636439839}
+--- !u!1001 &3142011034926399661
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5864568591256920230}
+    m_Modifications:
+    - target: {fileID: 2365143326476328904, guid: ca4b8e9833d264708a48ff3f1b0566bf, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2365143326476328904, guid: ca4b8e9833d264708a48ff3f1b0566bf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2365143326476328904, guid: ca4b8e9833d264708a48ff3f1b0566bf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2365143326476328904, guid: ca4b8e9833d264708a48ff3f1b0566bf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2365143326476328904, guid: ca4b8e9833d264708a48ff3f1b0566bf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2365143326476328904, guid: ca4b8e9833d264708a48ff3f1b0566bf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2365143326476328904, guid: ca4b8e9833d264708a48ff3f1b0566bf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2365143326476328904, guid: ca4b8e9833d264708a48ff3f1b0566bf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2365143326476328904, guid: ca4b8e9833d264708a48ff3f1b0566bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2365143326476328904, guid: ca4b8e9833d264708a48ff3f1b0566bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2365143326476328904, guid: ca4b8e9833d264708a48ff3f1b0566bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3141680751707260274, guid: ca4b8e9833d264708a48ff3f1b0566bf, type: 3}
+      propertyPath: m_Name
+      value: ControlledRobot
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ca4b8e9833d264708a48ff3f1b0566bf, type: 3}
+--- !u!4 &812907638309560165 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2365143326476328904, guid: ca4b8e9833d264708a48ff3f1b0566bf, type: 3}
+  m_PrefabInstance: {fileID: 3142011034926399661}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6748692300636439839 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8517012264496924082, guid: ca4b8e9833d264708a48ff3f1b0566bf, type: 3}
+  m_PrefabInstance: {fileID: 3142011034926399661}
+  m_PrefabAsset: {fileID: 0}
