@@ -20,6 +20,8 @@ namespace BodyTrackController.Scripts.MessagePack
 
             StaticCompositeResolver.Instance.Register(
                 GeneratedResolver.Instance,
+                StandardResolver.Instance,
+                StaticCompositeResolver.Instance,
                 UnityResolver.Instance,
                 UnityBlitWithPrimitiveArrayResolver.Instance
             );
