@@ -4,7 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/BodyTrackController/Scenes/BodyTracking.unity
+    guid: b4bc877bfdbdb49f2adb6256f105a4ac
   m_configObjects:
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: c61d59ef47eab464bb6c105ccc6b9e7e, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 5d6a8236bd7eb47eda73a020c80bf0db, type: 2}
