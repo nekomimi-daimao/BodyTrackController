@@ -25,6 +25,8 @@ namespace BodyTrackController.Scripts.PhotonShare
 
         private void Start()
         {
+            // never sleep
+            Screen.sleepTimeout = SleepTimeout.NeverSleep;
             Init(this.GetCancellationTokenOnDestroy()).Forget();
         }
 
